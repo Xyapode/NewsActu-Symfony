@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -22,6 +23,7 @@ class Article
     #[ORM\Column(type: 'string', length: 255)]
     private $subtitle;
 
+    #[Assert\NotBlank(message:"Ce message ne peut être vide")]
     #[ORM\Column(type: 'text')]
     private $content;
 
@@ -135,7 +137,7 @@ class Article
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    public function setDeletedAt(?\DateTimeInterface $deletedAt = null): self
     {
         $this->deletedAt = $deletedAt;
 
