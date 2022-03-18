@@ -17,7 +17,10 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AdminController extends AbstractController
 {
 
-    #[Route("/tableau-de-bord", name:"show_dashboard", methods:["GET"])]
+    // #[Route("/tableau-de-bord", name:"show_dashboard", methods:["GET"])]
+    /**
+     * @Route("/tableau-de-bord", name="show_dashboard", methods={"GET"})
+     */
     public function showDashboard(EntityManagerInterface $entityManager): Response
     {
         $articles = $entityManager->getRepository(Article::class)->findAll();
@@ -28,7 +31,10 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route("/creer-un-article", name:"create_article", methods:["GET|POST"])]
+    // #[Route("/creer-un-article", name:"create_article", methods:["GET|POST"])]
+    /**
+     * @Route("/creer-un-article", name="create_article", methods={"GET|POST"})
+     */
     public function createArticle(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $article = new Article();
@@ -96,7 +102,10 @@ class AdminController extends AbstractController
     }
 
     // L'action est exécuté 2 fois et accessible par 2 méthodes (GET|POST)
-    #[Route("/modifier-un-article/{id}", name:"update_article", methods:["GET|POST"])]
+    // #[Route("/modifier-un-article/{id}", name:"update_article", methods:["GET|POST"])]
+    /**
+     * @Route("/modifier-un-article/{id}", name="update_article", methods={"GET|POST"})
+     */
     public function updateArticle(Article $article, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
         # Condition ternaire : $article->getPhoto() ?? ''
@@ -150,7 +159,10 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route("/archiver-un-article/{id}", name:"soft_delete_article", methods:["GET"])]
+    // #[Route("/archiver-un-article/{id}", name:"soft_delete_article", methods:["GET"])]
+    /**
+     * @Route("/archiver-un-article/{id}", name="soft_delete_article", methods={"GET"})
+     */
     public function softDeleteArticle(Article $article, EntityManagerInterface $entityManager): Response
     {
         # On set la propriété deletedAt pour archiver l'article. De l'autre côté, on affichera les articles où deletedAt === null
@@ -164,7 +176,10 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('show_dashboard');
     }
 
-    #[Route("/supprimer-un-article/{id}", name:"hard_delete_article", methods:["GET"])]
+    // #[Route("/supprimer-un-article/{id}", name:"hard_delete_article", methods:["GET"])]
+    /**
+     * @Route("/supprimer-un-article/{id}", name="hard_delete_article", methods={"GET"})
+     */
     public function hardDeleteArticle(Article $article, EntityManagerInterface $entityManager): Response
     {
         # Cette méthode supprime une ligne en BDD
@@ -176,7 +191,10 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('show_dashboard');
     }
 
-    #[Route("/restaurer-un-article/{id}", name:"restore_article", methods:["GET"])]
+    // #[Route("/restaurer-un-article/{id}", name:"restore_article", methods:["GET"])]
+    /**
+     * @Route("/restaurer-un-article/{id}", name="restore_article", methods={"GET"})
+     */
     public function restoreArticle(Article $article, EntityManagerInterface $entityManager): Response
     {
         $article->setDeletedAt();
