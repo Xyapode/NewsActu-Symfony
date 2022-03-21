@@ -7,7 +7,7 @@
     <div class="row mx-auto">
 
         {% for article in articles %}
-            <div class="col-3 my-3 ms-2">  
+            <div class="col-3 my-3 ms-2 mx-auto">  
 
                 <div class="card" style="width: 18rem;">
                     <img src="{{ asset('uploads/') ~ article.photo }}" class="card-img-top img-card-custom" width="230" height="130" alt="{{ article.title }}">
