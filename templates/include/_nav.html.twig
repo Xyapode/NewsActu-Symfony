@@ -31,9 +31,20 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{{ path('show_dashboard') }}">Dashboard</a></li>
               <li><a class="dropdown-item" href="{{ path('create_article') }}">Ajouter un article</a></li>
-              <li><a class="dropdown-item" href="#">Ajouter une catégorie</a></li>
+              <li><a class="dropdown-item" href="{{ path('create_category') }}">Ajouter une catégorie</a></li>
               {# <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li> #}
+            </ul>
+          </li>
+
+        {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProfil" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Mon profil
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfil">
+              <li><a class="dropdown-item" href="#">Mes informations</a></li>
+              <li><a class="dropdown-item" href="#">Mes commentaires</a></li>
             </ul>
           </li>
         {% endif %}
