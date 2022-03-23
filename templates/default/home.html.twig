@@ -4,7 +4,9 @@
 
     <h1 class="text-center my-3">Tous les articles</h1>
 
-    <div class="row mx-auto">
+    {% include "include/_flashes.html.twig" %}
+
+    <div class="row">
 
         {% for article in articles %}
             <div class="col-3 my-3 ms-2 mx-auto">  

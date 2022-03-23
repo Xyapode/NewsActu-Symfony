@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -71,6 +72,11 @@ class Article
      * @ORM\OneToMany(targetEntity=Commentary::class, mappedBy="article")
      */
     private $commentaries;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     */
+    private $author;
 
     public function __construct()
     {
@@ -216,6 +222,18 @@ class Article
                 $commentary->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?UserInterface $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

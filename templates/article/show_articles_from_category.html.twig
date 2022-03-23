@@ -10,6 +10,8 @@
             <div class="mx-auto">
 
             <hr>
+
+                <a href="{{ path('show_article', {'cat_alias': article.category.alias, 'article_alias': article.alias, 'id': article.id}) }}" class="text-dark text-decoration-none">
                 <div class="card mb-3" style="max-width: 100%;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -19,15 +21,24 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ article.title | length > 80 ? article.title|slice(0,80) ~ '...' : article.title }}</h5>
                             <p class="card-text">{{ article.subtitle | length > 130 ? article.subtitle|slice(0,130) ~ '...' : article.subtitle }}</p>
-                            <p class="card-text"><small class="text-muted">Derbière modification : {{ article.updatedAt | date('d/m/Y') }}</small><span class="text-muted"> | Auteur : 
+                            <p class="card-text"><small class="text-muted">Derbière modification : {{ article.updatedAt | date('d/m/Y') }}</small><span class="text-muted"> | Auteur : {{ article.author.prenom }} {{ article.author.nom }}
                             </span></p>
                         </div>
                     </div>
                 </div>
             </div>
+            </a>
+        
+        </div>
+        
+
+    </div>
+{% else %}
+    <div class="row">
+        <div class="mx-auto col-10">
+            <p class="alert alert-info text-center">La catégorie {{ category.name }} ne contient pas encore d'article</p>
         </div>
     </div>
-
 {% endfor %}
 
 {% endblock %}
