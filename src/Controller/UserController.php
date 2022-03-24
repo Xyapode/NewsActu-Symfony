@@ -54,4 +54,27 @@ class UserController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/profile/modifier-mon-profil_{id}", name="update_user", methods={"GET|POST"})
+     */
+    public function updateUser(Request $request, EntityManagerInterface $entityManager, User $user): Response
+    {
+        $form = $this->createForm(RegisterFormType::class, $user)->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $user->setUpdatedAt(new DateTime());
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Vous avez modifié votre compte avec succès !");
+            return $this->redirectToRoute('show_profile');
+        }
+
+        return $this->render('user/update_user.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
