@@ -53,6 +53,10 @@
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li> #}
       </ul>
+      <div class="col-5">
+        {{ render(url('render_search_bar')) }}
+      </div>
+
       {% if app.user %}
         <div style="float: right; padding-right: 50px;">
             <i class="fa fa-user text-warning"></i><span class="text-warning"> Bonjour <span class="text-dark">{{ app.user.prenom}} {{ app.user.nom}}</span></span>

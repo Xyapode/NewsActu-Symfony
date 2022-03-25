@@ -118,4 +118,33 @@ class CommentaryController extends AbstractController
         return $this->redirect($request->server->get('HTTP_REFERER'));
 
     }
+
+    /**
+     * @Route("/restaurer-un-commentaire_{id}", name="restore_commentary", methods={"GET"} )
+     */
+    // public function restoreCommentary(Commentary $commentary, EntityManagerInterface $entityManager): Response
+    // {
+    //     $commentary->setDeletedAt(null);
+
+    //     $entityManager->persist($commentary);
+    //     $entityManager->flush();
+
+    //     $this->addFlash('success', "Le commentaire a bien été restauré.");
+    //     return $this->redirectToRoute('show_user_commentaries');
+    // }
+
+    /**
+     * @Route("/restaurer-un-commentaire_{id}", name="restore_commentary", methods={"GET"} )
+     */
+    public function restoreCommentary(Commentary $commentary, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $commentary->setDeletedAt(null);
+        
+        $entityManager->persist($commentary);
+        $entityManager->flush();
+
+        $this->addFlash('success', "Votre commentaire est restauré");
+
+        return $this->redirect($request->server->get('HTTP_REFERER'));
+    }
 }
